@@ -16,7 +16,7 @@ pipeline {
     
     environment {
         // Define the Docker image tag based on Jenkins build number
-        DOCKER_IMAGE_TAG = "flaskapp:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE_TAG = "flaskapp:hihello"
     }
     
     stages {
