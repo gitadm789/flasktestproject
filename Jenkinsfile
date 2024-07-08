@@ -1,42 +1,34 @@
-pipeline {
+
+
+
+
+
+    pipeline {
     agent any
 
-    stages {
-        stage('Example') {
-            steps {
-                echo "hello"
-            }
-        }
-    }
-
-
-
-
-
-    
-    environment {
-        // Define the Docker image tag based on Jenkins build number
-        DOCKER_IMAGE_TAG = "flaskapp:hihello"
-    }
-    
     stages {
         stage('Build Docker Image') {
             steps {
                 script {
                     // Build Docker image
-                    def dockerImage = docker.build DOCKER_IMAGE_TAG, "--file Dockerfile ."
-                    
-                    // Save Docker image to Jenkins workspace
-                    dockerImage.save("${env.WORKSPACE}/${DOCKER_IMAGE_TAG}.tar")
+                    dockerImage = docker.build('my-flask-app-image')
                 }
             }
         }
-        
-    //     stage('Copy Docker Image') {
-    //         steps {
-    //             // Copy Docker image tarball to project directory
-    //             sh "cp ${env.WORKSPACE}/${DOCKER_IMAGE_TAG}.tar ./"
-    //         }
-    //     }
-    // }
+
+        stage('Save Docker Image as Tar') {
+            steps {
+                // Save Docker image as tar file in Jenkins workspace
+                script {
+                    sh "docker save -o ${WORKSPACE}/my-flask-app-image.tar my-flask-app-image"
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Docker image saved as tar file successfully.'
+        }
+    }
 }
