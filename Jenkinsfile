@@ -11,8 +11,8 @@ pipeline {
             steps {
                 script {
                     // stop
-                    sh 'docker stop my-flask-app-image || true'
-                    sh 'docker rm my-flask-app-image || true'
+                    sh 'docker stop loving_williamson || true'
+                    sh 'docker rm loving_williamson || true'
                 }
             }
         }
@@ -23,7 +23,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image
-                    def dockerImage = docker.build('my-flask-app-image')
+                    def dockerImage = docker.build('loving_williamson')
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    def dockerImage = docker.build('my-flask-app-image')
+                    def dockerImage = docker.build('loving_williamson')
                     dockerImage.run('-d -p 5000:5000')
                 }
             }
