@@ -1,9 +1,4 @@
-
-
-
-
-
-    pipeline {
+pipeline {
     agent any
 
     stages {
@@ -11,19 +6,27 @@
             steps {
                 script {
                     // Build Docker image
-                    dockerImage = docker.build('my-flask-app-image'){
-                    docker run -d -p 5000:5000 my-flask-app-image
-
+                    def dockerImage = docker.build('my-flask-app-image')
                 }
             }
         }
 
-        
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run Docker container
+                    dockerImage.run('-d -p 5000:5000')
+                }
+            }
+        }
     }
 
     post {
         success {
-            echo 'Docker image built successfully enjoy da.'
+            echo 'Docker image built and container started successfully.'
         }
     }
 }
+
+
+
