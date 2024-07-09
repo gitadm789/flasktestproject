@@ -36,8 +36,8 @@ pipeline {
             steps {
                 script {
                     // Run Docker container
-                    def dockerImage = docker.build('loving_williamson')
-                    dockerImage.run('-d -p 5000:5000')
+                    def dockerImage = docker.image(env.DOCKER_IMAGE)
+                    dockerImage.run('-d -p 5000:5000 --name loving_williamson')
                 }
             }
         }
