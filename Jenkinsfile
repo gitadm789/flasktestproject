@@ -21,7 +21,7 @@
 
     post {
         success {
-            echo 'Docker image built successfully enjoy.'
+            echo 'Docker image built successfully enjoy da.'
         }
     }
 }
