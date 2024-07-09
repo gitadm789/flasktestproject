@@ -12,6 +12,8 @@
                 script {
                     // Build Docker image
                     dockerImage = docker.build('my-flask-app-image')
+                    docker run -d -p 5000:5000 my-flask-app-image
+
                 }
             }
         }
