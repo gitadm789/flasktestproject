@@ -5,6 +5,20 @@ pipeline {
     agent any
 
     stages {
+
+
+        stage('stop and remove container') {
+            steps {
+                script {
+                    // stop
+                    sh 'docker stop my-flask-app-image || true'
+                    sh 'docker rm my-flask-app-image || true'
+                }
+            }
+        }
+
+
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -17,17 +31,6 @@ pipeline {
 
         
 
-
-
-        stage('stop and remove container') {
-            steps {
-                script {
-                    // stop
-                    sh 'docker stop my-flask-app-image || true'
-                    sh 'docker rm my-flask-app-image || true'
-                }
-            }
-        }
 
         stage('Run Docker Container') {
             steps {
