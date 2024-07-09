@@ -1,3 +1,6 @@
+
+
+
 pipeline {
     agent any
 
@@ -11,7 +14,15 @@ pipeline {
             }
         }
 
-        
+        stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run Docker container
+                    def dockerImage = docker.build('my-flask-app-image')
+                    dockerImage.run('-d -p 5000:5000')
+                }
+            }
+        }
     }
 
     post {
@@ -20,6 +31,3 @@ pipeline {
         }
     }
 }
-
-
-
