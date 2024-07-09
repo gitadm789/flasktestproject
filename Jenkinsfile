@@ -11,14 +11,7 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container') {
-            steps {
-                script {
-                    // Run Docker container
-                    dockerImage.run('-d -p 5000:5000')
-                }
-            }
-        }
+        
     }
 
     post {
